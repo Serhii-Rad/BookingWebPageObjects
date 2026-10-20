@@ -5,6 +5,10 @@ VisualStudioVersion = 17.14.37027.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingWebPageObjects", "BookingWebPageObjects.csproj", "{D69C797B-558A-43E5-97E5-4B6E7C1958C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaywrightBaseFramework", "..\PlaywrightBaseFramework\PlaywrightBaseFramework.csproj", "{EC786FAE-889F-2497-8535-66E6486EEDC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFrameworkCore", "..\Serhii-Rad\TestFrameworkCore\TestFrameworkCore.csproj", "{32E7D6EB-223C-AA4C-0E63-11104CEE1E03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{D69C797B-558A-43E5-97E5-4B6E7C1958C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D69C797B-558A-43E5-97E5-4B6E7C1958C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D69C797B-558A-43E5-97E5-4B6E7C1958C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC786FAE-889F-2497-8535-66E6486EEDC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC786FAE-889F-2497-8535-66E6486EEDC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC786FAE-889F-2497-8535-66E6486EEDC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC786FAE-889F-2497-8535-66E6486EEDC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32E7D6EB-223C-AA4C-0E63-11104CEE1E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32E7D6EB-223C-AA4C-0E63-11104CEE1E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32E7D6EB-223C-AA4C-0E63-11104CEE1E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32E7D6EB-223C-AA4C-0E63-11104CEE1E03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
