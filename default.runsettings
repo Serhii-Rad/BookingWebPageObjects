@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<!-- NUnit adapter -->
+	<NUnit>
+		<NumberOfTestWorkers>1</NumberOfTestWorkers>
+	</NUnit>
+	<!-- General run configuration -->
+	<RunConfiguration>
+
+		<!-- Omit the whole tag for auto-detection. -->
+		<!-- [x86] or x64, ARM, ARM64, s390x  -->
+		<!-- You can also change it from the Test menu; choose "Processor Architecture for AnyCPU Projects" -->
+		<TargetPlatform>x64</TargetPlatform>
+
+		<!-- TestSessionTimeout was introduced in Visual Studio 2017 version 15.5 -->
+		<!-- Specify timeout in milliseconds. A valid value should be greater than 0 -->
+		<!-- Max execution time is 1 hour -->
+		<!-- <TestSessionTimeout>3600000</TestSessionTimeout> -->
+
+		<EnvironmentVariables>
+			<!-- For debugging selectors, it's recommend to set the following environment variable -->
+			<DEBUG>pw:api</DEBUG>
+		</EnvironmentVariables>
+	</RunConfiguration>
+
+	<TestRunParameters>
+		<Parameter name="testInstanceUrl" value="https://testteamdev.syxsense.io/" />
+		<Parameter name="defaultUserName" value="sbondar@absolute.com" />
+		<Parameter name="defaultUserPassword" value="1" />
+
+		<Parameter name="defaultLogsFolder" value="" />
+		<Parameter name="defaultDownloadFolder" value="" />
+		<Parameter name="enableTracing" value="False" />
+	</TestRunParameters>
+	
+	 <!--Configuration for loggers 
+	<LoggerRunSettings>
+		<Loggers>
+			<Logger friendlyName="console" enabled="True">
+				<Configuration>
+					<Verbosity>quiet</Verbosity>
+				</Configuration>
+			</Logger>
+			<Logger friendlyName="trx" enabled="True">
+				<Configuration>
+					<LogFileName>foo.trx</LogFileName>
+				</Configuration>
+			</Logger>
+			<Logger friendlyName="html" enabled="True">
+				<Configuration>
+					<LogFileName>foo.html</LogFileName>
+				</Configuration>
+			</Logger>
+			<Logger friendlyName="blame" enabled="True" />
+		</Loggers>
+	</LoggerRunSettings>-->
+	
+	<!-- Playwright -->
+	<Playwright>
+		<BrowserName>chromium</BrowserName>
+		<!-- chromium, firefox, webkit-->
+		<ExpectTimeout>5000</ExpectTimeout>
+		<LaunchOptions>
+			<Headless>false</Headless>
+			<!-- Not works with LaunchAsync() -->
+			<Channel>chrome</Channel>
+			<!-- chrome, chrome-beta, msedge, msedge-beta, msedge-dev, firefox, firefox-asan, webkit-->
+			<!-- <SlowMo>2000</SlowMo> -->
+		</LaunchOptions>
+	</Playwright>
+</RunSettings>
