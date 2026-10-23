@@ -24,9 +24,9 @@
 	</RunConfiguration>
 
 	<TestRunParameters>
-		<Parameter name="testInstanceUrl" value="https://testteamdev.syxsense.io/" />
-		<Parameter name="defaultUserName" value="sbondar@absolute.com" />
-		<Parameter name="defaultUserPassword" value="1" />
+		<Parameter name="baseUrl" value="https://www.booking.com/" />
+		<Parameter name="defaultUserName" value="" />
+		<Parameter name="defaultUserPassword" value="" />
 
 		<Parameter name="defaultLogsFolder" value="" />
 		<Parameter name="defaultDownloadFolder" value="" />

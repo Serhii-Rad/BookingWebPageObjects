@@ -10,7 +10,7 @@ namespace BookingWebPageObjects.BaseElements
 {
     internal class StaticMenu : StaticMenuBase
     {
-        public StaticMenu(ILocator locator) : base(locator)
+        public StaticMenu(ILocator locator, string menuItemSelector) : base(locator, menuItemSelector)
         {
         }
     }

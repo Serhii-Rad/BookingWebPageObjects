@@ -12,7 +12,7 @@ namespace BookingWebPageObjects.Page_Objects
         {
         }
 
-        public StaticMenu TabsMenu => new StaticMenu(_pageLocator.Locator("ul[role='menubar']"));
+        public StaticMenu TabsMenu => new StaticMenu(_pageLocator.Locator("ul[role='menubar']"), "a[role='menuitem']");
         public CurrencyPanel CurrencyPanel => new CurrencyPanel(_pageLocator, CurrencyButton);
         public LanguagePanel LanguagePanel => new LanguagePanel(_pageLocator, LanguageButton);
         public Button CurrencyButton => new Button(_pageLocator.Locator("button[data-testid='header-currency-picker-trigger']"));
