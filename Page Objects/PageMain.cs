@@ -20,5 +20,6 @@ namespace BookingWebPageObjects.Page_Objects
         public Button CustomerServiceButton => new Button(_pageLocator.Locator("a[data-testid='header-help-center']"));
         public Button ListYourPropertyButton => new Button(_pageLocator.Locator("a[data-testid='header-custom-action-button']"));
         public Button UserProfileButton => new Button(_pageLocator.Locator("button[data-testid='header-profile']"));
+        public DropDownMenu UserDropDownMenu => new DropDownMenu(_pageLocator.Locator("div[data-testid='header-profile-menu']"), "li");
     }
 }

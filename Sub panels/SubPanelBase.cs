@@ -4,6 +4,9 @@ using TestFrameworkCore.Interfaces;
 
 namespace BookingWebPageObjects.Sub_panels
 {
+    /// <summary>
+    /// Any panel or dropdown that is opened by a trigger element (ex. button click)
+    /// </summary>
     internal class SubPanelBase : PageBase
     {
         protected readonly ILocator _panelLocator;

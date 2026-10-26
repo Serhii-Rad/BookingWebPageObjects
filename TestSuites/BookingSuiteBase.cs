@@ -62,7 +62,7 @@ namespace BookingWebPageObjects.TestSuites
             await Page.GotoAsync(BaseUrl);
 
             // skip sign in popup
-            if (await Page.Locator("div[aria-label='Window offering discounts of 10% or more when you sign in to Booking.com']").WaitForConditionAsync(x => x.IsVisibleAsync(), Timeouts.Short))
+            if (await Page.Locator("div[aria-label='Window offering discounts of 10% or more when you sign in to Booking.com']").WaitForConditionAsync(x => x.IsVisibleAsync(), Timeouts.Medium))
                 await Page.Locator("button[aria-label='Dismiss sign-in info.']").ClickAsync();
 
             TestContext.Out.WriteLine($"BookingDefaultStartUpAsync finished: '{_test.Name}'.");
