@@ -41,10 +41,13 @@ namespace BookingWebPageObjects.Sub_panels
         {
             Logs.LogMethodEntry(logLevel: LogLevel.Information);
 
-            if (_triggerElementToOpen is Button button)
-                await button.ClickAsync();
-            else
-                throw new InvalidOperationException("Button to open is null or not a Button.");
+            if (await IsHiddenAsync())
+            {
+                if (_triggerElementToOpen is Button button)
+                    await button.ClickAsync();
+                else
+                    throw new InvalidOperationException("Button to open is null or not a Button.");
+            }
         }   
 
         public async Task CloseAsync()

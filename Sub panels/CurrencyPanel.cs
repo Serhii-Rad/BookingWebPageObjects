@@ -47,7 +47,6 @@ namespace BookingWebPageObjects.Sub_panels
 
             if (await IsHiddenAsync())
             {
-
                 if (_triggerElementToOpen is Button button)
                     await button.ClickAsync();
                 else
