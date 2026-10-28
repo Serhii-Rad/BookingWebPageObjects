@@ -4,15 +4,19 @@ using PlaywrightBaseFramework.PageCore;
 
 namespace BookingWebPageObjects.Page_Objects
 {
-    internal class Pages : PagesBase
+    internal class Pages 
     {
+        private readonly IPage _page;
 
-        public Pages(IPage page) : base(page) 
+        private PageMain? _pageMain;
+        private StaysPage? _staysPage;
+
+        public Pages(IPage page)
         {
+            _page = page;
         }
 
-        public PageMain PageMain => GetInstance<PageMain>();
-
-        public StaysPage StaysPage => GetInstance<StaysPage>();
+        public PageMain PageMain => _pageMain ??= new PageMain(_page);
+        public StaysPage StaysPage => _staysPage ??= new StaysPage(_page);
     }
 }

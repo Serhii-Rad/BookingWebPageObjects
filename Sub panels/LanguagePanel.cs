@@ -15,7 +15,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task SelectLanguage(string language)
         {
-            Logs.LogMethodEntry(language, LogLevel.Information);
+            Logs.LogMethodEntry(language, CoreLogLevel.Info);
 
             var languageOptionLocator = _panelLocator.Locator($"button[data-testid='selection-item']").GetByText(language);
             await languageOptionLocator.ClickAsync();
@@ -39,7 +39,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task OpenAsync()
         {
-            Logs.LogMethodEntry(logLevel: LogLevel.Information);
+            Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
 
             if (await IsHiddenAsync())
             {
@@ -52,7 +52,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task CloseAsync()
         {
-            Logs.LogMethodEntry(logLevel: LogLevel.Information);
+            Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
 
             var closeButtonLocator = _panelLocator.Locator("button[data-testid='selection-modal-close']");
             await closeButtonLocator.ClickAsync();

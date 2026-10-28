@@ -15,7 +15,7 @@ namespace BookingWebPageObjects.Sub_panels
         
         public async Task SelectCurrency(string currencyCode)
         {
-            Logs.LogMethodEntry(currencyCode, LogLevel.Information);
+            Logs.LogMethodEntry(currencyCode, CoreLogLevel.Info);
 
             await OpenAsync();
 
@@ -43,7 +43,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task OpenAsync()
         {
-            Logs.LogMethodEntry(logLevel: LogLevel.Information);
+            Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
 
             if (await IsHiddenAsync())
             {
@@ -56,7 +56,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task CloseAsync()
         {
-            Logs.LogMethodEntry(logLevel: LogLevel.Information);
+            Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
 
             if (await IsVisibleAsync())
             {

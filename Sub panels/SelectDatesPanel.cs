@@ -34,7 +34,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task OpenAsync()
         {
-            Logs.LogMethodEntry(logLevel: LogLevel.Information);
+            Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
             if (await IsHiddenAsync())
             {
                 if (_triggerElementToOpen is Button inputField)

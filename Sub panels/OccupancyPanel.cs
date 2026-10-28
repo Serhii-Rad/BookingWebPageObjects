@@ -24,7 +24,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task OpenAsync()
         {
-            Logs.LogMethodEntry(logLevel: Microsoft.Testing.Platform.Logging.LogLevel.Information);
+            Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
             if (await IsHiddenAsync())
             {
                 if (_triggerElementToOpen is Button button)
