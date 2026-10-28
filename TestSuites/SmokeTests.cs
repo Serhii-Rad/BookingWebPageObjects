@@ -152,6 +152,8 @@ namespace BookingWebPageObjects.TestSuites
         {
             Step = 1;
             TestAsserts.AssertIsTrue(await StaysPage.OccupancyButton.IsVisibleAsync(), "Occupancy button is not visible");
+            string currentValue = await StaysPage.OccupancyButton.GetTextAsync();
+            TestAsserts.AssertAreEqual("2 adults · 0 children · 1 room", currentValue);
 
             Step = 2;
             await StaysPage.OccupancyDropDown.OpenAsync();
@@ -161,24 +163,24 @@ namespace BookingWebPageObjects.TestSuites
             string adults = "5";
             string children = "1";
             string rooms = "3";
+            await StaysPage.OccupancyDropDown.OpenAsync();
             await StaysPage.OccupancyDropDown.AdultsInputs.SetTextAsync(adults);
             await StaysPage.OccupancyDropDown.ChildrenInputs.SetTextAsync(children);
-            await StaysPage.OccupancyDropDown.GetChildAgeDropDown().SelectItemAsync("0 years old");
+            await StaysPage.OccupancyDropDown.GetChildAgeDropDown().SelectItemAsync("10", false);
             await StaysPage.OccupancyDropDown.RoomsInputs.SetTextAsync(rooms);
             await StaysPage.OccupancyDropDown.TravelingWithPetsCheckBox.SetCheckAsync(true);
             await StaysPage.OccupancyDropDown.DoneButton.ClickAsync();
-
-            TestAsserts.AssertAreEqual($"{adults} adults · {children} children · Pets · {rooms} rooms", await StaysPage.OccupancyButton.GetTextAsync());
+            currentValue = await StaysPage.OccupancyButton.GetTextAsync();
+            TestAsserts.AssertAreEqual($"{adults} adults · {children} child · Pets · {rooms} rooms", currentValue);
 
             Step = 4;
             await StaysPage.OccupancyDropDown.OpenAsync();
 
             TestAsserts.AssertAreEqual(adults, await StaysPage.OccupancyDropDown.AdultsInputs.GetValueAsync());
-            TestAsserts.AssertAreEqual(children, await StaysPage.OccupancyDropDown.AdultsInputs.GetValueAsync());
-            TestAsserts.AssertAreEqual("0 years old", await StaysPage.OccupancyDropDown.GetChildAgeDropDown().GetCurrentValueAsync());
-            TestAsserts.AssertAreEqual(rooms, await StaysPage.OccupancyDropDown.AdultsInputs.GetValueAsync());
+            TestAsserts.AssertAreEqual(children, await StaysPage.OccupancyDropDown.ChildrenInputs.GetValueAsync());
+            TestAsserts.AssertAreEqual("10 years old", await StaysPage.OccupancyDropDown.GetChildAgeDropDown().GetCurrentValueAsync());
+            TestAsserts.AssertAreEqual(rooms, await StaysPage.OccupancyDropDown.RoomsInputs.GetValueAsync());
             TestAsserts.AssertIsTrue(await StaysPage.OccupancyDropDown.TravelingWithPetsCheckBox.IsCheckedAsync());
-
         }
 
         //[Test]

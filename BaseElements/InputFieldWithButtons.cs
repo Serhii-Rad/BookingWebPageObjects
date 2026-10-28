@@ -10,8 +10,8 @@ namespace BookingWebPageObjects.BaseElements
 
         }
 
-        public Button PlusButton => new Button(_baseLocator.Locator(".parent button").First);
-        public Button MinusButton => new Button(_baseLocator.Locator(".parent button").First);
+        public Button PlusButton => new Button(_baseLocator.Locator("~button").Last);
+        public Button MinusButton => new Button(_baseLocator.Locator("~button").First);
 
         public override async Task SetTextAsync(string text, bool withEnterPress = true, bool withClearing = true, int millisecondsInputDelay = 20)
         {

@@ -14,13 +14,13 @@ namespace BookingWebPageObjects.Sub_panels
 
         public InputFieldWithButtons AdultsInputs => new InputFieldWithButtons(_panelLocator.Locator("input[id='group_adults']"));
         public InputFieldWithButtons ChildrenInputs => new InputFieldWithButtons(_panelLocator.Locator("input[id='group_children']"));
-        public InputFieldWithButtons RoomsInputs => new InputFieldWithButtons(_panelLocator.Locator("input[id='group_rooms']"));
+        public InputFieldWithButtons RoomsInputs => new InputFieldWithButtons(_panelLocator.Locator("input[id='no_rooms']"));
 
         public DropDownMenu GetChildAgeDropDown(int number = 0) => new DropDownMenu(_panelLocator.Locator("select[name='age']").Nth(number), "option");
 
         public Button DoneButton => new Button(_panelLocator.Locator("button").GetByText("Done"));
 
-        public CheckBox TravelingWithPetsCheckBox => new CheckBox(_panelLocator.Locator("input[id='pets'][role='switch']"));
+        public CheckBox TravelingWithPetsCheckBox => new CheckBox(_panelLocator.Locator("input[id='pets'][role='switch']~label"));
 
         public async Task OpenAsync()
         {

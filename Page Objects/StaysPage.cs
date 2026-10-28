@@ -12,7 +12,7 @@ namespace BookingWebPageObjects.Pages
         }
 
         public InputField DestinationInputField => new InputField(_pageLocator.Locator("input[id='searchbox-horizontal-destination-input']"));
-        public DropDownMenu TrendingDestinationsDropDown => new DropDownMenu(_pageLocator.Locator("div[data-testid='autocomplete-results']"));
+        public DropDownMenu TrendingDestinationsDropDown => new DropDownMenu(_pageLocator.Locator("div[data-testid='autocomplete-results']"), "li[role='option']");
         public Button SearchButton => new Button(_pageLocator.Locator("button[data-testid='searchbox-submit-button']"));
         public Button DatesButton => new Button(_pageLocator.Locator("button[data-testid='searchbox-dates-container']"));
         public Button OccupancyButton => new Button(_pageLocator.Locator("button[data-testid='occupancy-config']"));
