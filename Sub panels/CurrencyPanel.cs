@@ -12,10 +12,9 @@ namespace BookingWebPageObjects.Sub_panels
         {
         }
 
-        
         public async Task SelectCurrency(string currencyCode)
         {
-            Logs.LogMethodEntry(currencyCode, CoreLogLevel.Info);
+            Logs.LogMethodEntry($"Locator: {_panelLocator}; Currency Code: {currencyCode}", CoreLogLevel.Info);
 
             await OpenAsync();
 
@@ -25,7 +24,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task<string> GetSelectedCurrency()
         {
-            Logs.LogMethodEntry();
+            Logs.LogMethodEntry($"Locator: {_panelLocator}");
 
             await OpenAsync();
 
@@ -35,7 +34,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task<bool> IsVisibleCurrencyOption(string currencyCode)
         {
-            Logs.LogMethodEntry(currencyCode);
+            Logs.LogMethodEntry($"Locator: {_panelLocator}; Currency Code: {currencyCode}");
 
             var currencyOptionLocator = _panelLocator.Locator($"button[data-testid='selection-item']").GetByText(currencyCode);
             return await currencyOptionLocator.IsVisibleAsync();
@@ -43,7 +42,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task OpenAsync()
         {
-            Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
+            Logs.LogMethodEntry($"Locator: {_panelLocator}", CoreLogLevel.Info);
 
             if (await IsHiddenAsync())
             {
@@ -56,7 +55,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task CloseAsync()
         {
-            Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
+            Logs.LogMethodEntry($"Locator: {_panelLocator}", CoreLogLevel.Info);
 
             if (await IsVisibleAsync())
             {

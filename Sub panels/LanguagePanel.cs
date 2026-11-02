@@ -15,15 +15,15 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task SelectLanguage(string language)
         {
-            Logs.LogMethodEntry(language, CoreLogLevel.Info);
+            Logs.LogMethodEntry($"Locator: {_panelLocator}; Language: {language}", CoreLogLevel.Info);
 
-            var languageOptionLocator = _panelLocator.Locator($"button[data-testid='selection-item']").GetByText(language);
+            var languageOptionLocator = _panelLocator.Locator($"button[data-testid='selection-item']").GetByText(language).First;
             await languageOptionLocator.ClickAsync();
         }
 
         public async Task<string> GetSelectedLanguage()
         {
-            Logs.LogMethodEntry();
+            Logs.LogMethodEntry($"Locator: {_panelLocator}");
 
             var selectedLanguageLocator = _panelLocator.Locator("button[data-testid='selection-item'][aria-pressed='true']");
             return await selectedLanguageLocator.InnerTextAsync();
@@ -31,7 +31,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task<bool> IsVisibleLanguageOption(string language)
         {
-            Logs.LogMethodEntry(language);
+            Logs.LogMethodEntry($"Locator: {_panelLocator}; Language: {language}");
 
             var languageOptionLocator = _panelLocator.Locator($"button[data-testid='selection-item']").GetByText(language);
             return await languageOptionLocator.IsVisibleAsync();
@@ -39,7 +39,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task OpenAsync()
         {
-            Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
+            Logs.LogMethodEntry($"Locator: {_panelLocator}", CoreLogLevel.Info);
 
             if (await IsHiddenAsync())
             {
@@ -52,7 +52,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task CloseAsync()
         {
-            Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
+            Logs.LogMethodEntry($"Locator: {_panelLocator}", CoreLogLevel.Info);
 
             var closeButtonLocator = _panelLocator.Locator("button[data-testid='selection-modal-close']");
             await closeButtonLocator.ClickAsync();

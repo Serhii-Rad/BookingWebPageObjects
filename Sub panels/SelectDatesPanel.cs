@@ -14,6 +14,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task SelectDates(DateTime checkInDate, DateTime checkOutDate)
         {
+            Logs.LogMethodEntry($"Locator: {_panelLocator}; Check-in Date: {checkInDate.ToString("yyyy-MM-dd")}; Check-out Date: {checkOutDate.ToString("yyyy-MM-dd")}", CoreLogLevel.Info);
             await OpenAsync();
 
             var checkInDateLocator = _panelLocator.Locator($"div[id='calendar-searchboxdatepicker'] span[role='checkbox'][aria-label='{checkInDate.ToString("dddd, MMMM d, yyyy")}']");
@@ -24,6 +25,7 @@ namespace BookingWebPageObjects.Sub_panels
 
         public async Task<(DateTime? checkInDate, DateTime? checkOutDate)> GetSelectedDatesAsync()
         {
+            Logs.LogMethodEntry($"Locator: {_panelLocator}");
             await OpenAsync();
 
             var checkInDate = DateTime.ParseExact(await _panelLocator.Locator("div[id='calendar-searchboxdatepicker'] span[role='checkbox'][aria-checked='true'][aria-label*='Check-in date']").GetAttributeAsync("data-date"), "yyyy-MM-dd", null);

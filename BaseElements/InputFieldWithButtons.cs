@@ -1,5 +1,6 @@
 ﻿using Microsoft.Playwright;
 using PlaywrightBaseFramework.BaseElements;
+using TestFrameworkCore.LoggerLogs;
 
 namespace BookingWebPageObjects.BaseElements
 {
@@ -13,8 +14,10 @@ namespace BookingWebPageObjects.BaseElements
         public Button PlusButton => new Button(_baseLocator.Locator("~button").Last);
         public Button MinusButton => new Button(_baseLocator.Locator("~button").First);
 
-        public override async Task SetTextAsync(string text, bool withEnterPress = true, bool withClearing = true, int millisecondsInputDelay = 20)
+        public new async Task SetTextAsync(string text, bool withEnterPress = true, bool withClearing = true, int millisecondsInputDelay = 20)
         {
+            Logs.LogMethodEntry($"Locator: {_baseLocator}; Text: '{text}'; With pressing Enter: {withEnterPress}; With clearing: {withClearing}; Input delay (ms): {millisecondsInputDelay}", CoreLogLevel.Info);
+
             string? currentValueString = await base.GetValueAsync();
 
             if (string.IsNullOrEmpty(currentValueString))
