@@ -10,6 +10,7 @@ namespace BookingWebPageObjects.Page_Objects
 
         private PageMain? _pageMain;
         private StaysPage? _staysPage;
+        private FlightsPage? _flightsPage;
 
         public Pages(IPage page)
         {
@@ -18,5 +19,6 @@ namespace BookingWebPageObjects.Page_Objects
 
         public PageMain PageMain => _pageMain ??= new PageMain(_page);
         public StaysPage StaysPage => _staysPage ??= new StaysPage(_page);
+        public FlightsPage FlightsPage => _flightsPage ??= new FlightsPage(_page);
     }
 }
