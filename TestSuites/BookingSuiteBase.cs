@@ -1,6 +1,7 @@
 ﻿using BookingWebPageObjects.Helpers;
 using BookingWebPageObjects.Page_Objects;
 using BookingWebPageObjects.Pages;
+using Microsoft.Playwright;
 using NUnit.Framework;
 using PlaywrightBaseFramework.Helpers.Extensions;
 using PlaywrightBaseFramework.TestSuite;
@@ -63,6 +64,37 @@ namespace BookingWebPageObjects.TestSuites
             Logs.Logger.Info($"{nameof(BookingEveryTestTearDown)} finished: '{_test.Name}'.\n");
         }
 
+        /// <summary>
+        /// Same as SuiteBase.CreateBrowserAsync + '--disable-blink-features=AutomationControlled'.
+        /// Without it Booking detects automation and Flights autocomplete shows "Something's not right..." instead of suggestions.
+        /// </summary>
+        protected override async Task CreateBrowserAsync()
+        {
+            Browser = await Playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+            {
+#if DEBUG
+                Headless = false,
+#endif
+                Args = new[]
+                {
+                "--lang=en-US",
+                "--disable-blink-features=AutomationControlled",
+                "--disable-infobars",
+                "--disable-features=DownloadUI",
+                "--use-fake-ui-for-media-stream",
+                "--disable-notifications",
+                "--safebrowsing-disable-download-protection",
+                "--safebrowsing-disable-extension-blacklist",
+                "--disable-popup-blocking",
+                "--profile.default_content_setting_values.notifications=2",
+                "--profile.managed_default_content_settings.javascript=1",
+                "--profile.managed_default_content_settings.media_stream=2",
+                "--start-maximized"
+                },
+                DownloadsPath = PathHelperBase.GetDownloadFolder(),
+            });
+        }
+
         protected override async Task DefaultTestSetUpAsync()
         {
             if (!string.IsNullOrEmpty(BaseUrl))
@@ -84,6 +116,7 @@ namespace BookingWebPageObjects.TestSuites
         #region Pages
         public PageMain PageMain => Pages.PageMain;
         public StaysPage StaysPage => Pages.StaysPage;
+        public FlightsPage FlightsPage => Pages.FlightsPage;
         #endregion
     }
 }
