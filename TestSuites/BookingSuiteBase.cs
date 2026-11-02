@@ -21,14 +21,16 @@ namespace BookingWebPageObjects.TestSuites
         public WaitHelper WaitHelper => new WaitHelper(Page);
 
         [OneTimeSetUp]
-        public async Task BookingOneTimeSetUpAsync()
+        public void BookingOneTimeSetUp()
         {
-            TestContext.Out.WriteLine($"BookingOneTimeSetUpAsync finished: '{_test.Name}'.");
-            Logs.Logger.Info($"BookingOneTimeSetUpAsync finished: '{_test.Name}'.\n");
+            // Add any necessary actions here
+
+            TestContext.Out.WriteLine($"{nameof(BookingOneTimeSetUp)} finished: '{_test.Name}'.");
+            Logs.Logger.Info($"{nameof(BookingOneTimeSetUp)} finished: '{_test.Name}'.\n");
         }
 
         [SetUp]
-        public async Task BookingEveryTestSetUpAsync()
+        public async Task BookingEveryTestSetUp()
         {
             await CreatePageAsync();
 
@@ -36,30 +38,35 @@ namespace BookingWebPageObjects.TestSuites
             if (startupCustomMethodTask is Task task)
                 await task;
 
-            TestContext.Out.WriteLine($"BookingEveryTestSetUpAsync finished: '{_test.Name}'.");
-            Logs.Logger.Info($"BookingEveryTestSetUpAsync finished: '{_test.Name}'.\n");
+            // Add any necessary actions here
+
+            TestContext.Out.WriteLine($"{nameof(BookingEveryTestSetUp)} finished: '{_test.Name}'.");
+            Logs.Logger.Info($"{nameof(BookingEveryTestSetUp)} finished: '{_test.Name}'.\n");
 
         }
 
         [OneTimeTearDown]
-        public async Task BookingOneTimeTearDownAsync()
+        public void BookingOneTimeTearDown()
         {
-            TestContext.Out.WriteLine($"BookingOneTimeTearDownAsync finished: '{_test.Name}'.");
-            Logs.Logger.Info($"BookingOneTimeTearDownAsync finished: '{_test.Name}'.\n");
+            // Add any necessary actions here
+
+            TestContext.Out.WriteLine($"{nameof(BookingOneTimeTearDown)} finished: '{_test.Name}'.");
+            Logs.Logger.Info($"{nameof(BookingOneTimeTearDown)} finished: '{_test.Name}'.\n");
         }
 
         [TearDown]
-        public async Task BookingEveryTestTearDownAsync()
+        public void BookingEveryTestTearDown()
         {
-            // Add any necessary teardown steps here
+            // Add any necessary actions here
 
-            TestContext.Out.WriteLine($"BookingEveryTestTearDownAsync finished: '{_test.Name}'.");
-            Logs.Logger.Info($"BookingEveryTestTearDownAsync finished: '{_test.Name}'.\n");
+            TestContext.Out.WriteLine($"{nameof(BookingEveryTestTearDown)} finished: '{_test.Name}'.");
+            Logs.Logger.Info($"{nameof(BookingEveryTestTearDown)} finished: '{_test.Name}'.\n");
         }
 
         protected override async Task DefaultTestSetUpAsync()
         {
-            await Page.GotoAsync(BaseUrl);
+            if (!string.IsNullOrEmpty(BaseUrl))
+                await Page.GotoAsync(BaseUrl);
 
             // skip sign in popup
             if (await Page.Locator("div[aria-label='Window offering discounts of 10% or more when you sign in to Booking.com']").WaitForConditionAsync(x => x.IsVisibleAsync(), Timeouts.Medium))

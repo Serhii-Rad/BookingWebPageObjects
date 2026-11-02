@@ -1,7 +1,6 @@
 ﻿using BookingWebPageObjects.BaseElements;
 using BookingWebPageObjects.Page_Objects;
 using NUnit.Framework;
-using TestFrameworkCore.Asserts;
 
 namespace BookingWebPageObjects.TestSuites
 {
@@ -14,16 +13,16 @@ namespace BookingWebPageObjects.TestSuites
             Step = 1;
             List<string> expectedTabsNames = new List<string> { "Stays", "Flights", "Flight + Hotel", "Car rental" };
             IReadOnlyList<Button> actualButtonsList = await PageMain.TabsMenu.GetMenuElementsAsync(locator => new Button(locator));
-            List<string> actualButtonsText = new List<string>();
+            List<string?> actualButtonsText = new List<string?>();
             foreach (Button button in actualButtonsList)
             {
                 string? buttonText = await button.GetTextAsync();
                 actualButtonsText.Add(buttonText);
             }
-            TestAsserts.AssertAreEqual(6, actualButtonsList.Count, "There are incorrect main tabs items amount");
+            Assert.That(6, Is.EqualTo(actualButtonsList.Count), "There are incorrect main tabs items amount");
             for (int i = 0; i < 4; i++)
             {
-                TestAsserts.AssertAreEqual(expectedTabsNames[i], actualButtonsText[i], $"The tab at index {i} is incorrect");
+                Assert.That(expectedTabsNames[i], Is.EqualTo(actualButtonsText[i]), $"The tab at index {i} is incorrect");
             }
         }
 
@@ -31,15 +30,14 @@ namespace BookingWebPageObjects.TestSuites
         public async Task TC0002_TestCurrencyButtonFunctionality()
         {
             Step = 1;
-            TestAsserts.AssertIsTrue(await PageMain.CurrencyButton.IsVisibleAsync(), "Currency button is not visible");
+            Assert.That(await PageMain.CurrencyButton.IsVisibleAsync(), Is.True, "Currency button is not visible");
 
             Step = 2;
             string? currentCurrency = await PageMain.CurrencyButton.GetTextAsync();
-            TestAsserts.AssertIsTrue(!string.IsNullOrEmpty(currentCurrency), "Current currency is not displayed on the button");
-
+            Assert.That(string.IsNullOrEmpty(currentCurrency), Is.False, "Current currency is not displayed on the button");
             Step = 3;
             await PageMain.CurrencyButton.ClickAsync();
-            TestAsserts.AssertIsTrue(await PageMain.CurrencyPanel.IsVisibleAsync(), "Currency panel is not visible");
+            Assert.That(await PageMain.CurrencyPanel.IsVisibleAsync(), Is.True, "Currency panel is not visible");
         }
 
         [Test]
@@ -48,33 +46,32 @@ namespace BookingWebPageObjects.TestSuites
             Step = 1;
             string currencyCodeToSelect = "USD";
             await PageMain.CurrencyPanel.OpenAsync();
-            TestAsserts.AssertIsTrue(await PageMain.CurrencyPanel.IsVisibleAsync(), "Currency panel is not visible");
+            Assert.That(await PageMain.CurrencyPanel.IsVisibleAsync(), Is.True, "Currency panel is not visible");
             if (await PageMain.CurrencyPanel.GetSelectedCurrency() == currencyCodeToSelect)
                 currencyCodeToSelect = "EUR";
             await PageMain.CurrencyPanel.SelectCurrency(currencyCodeToSelect);
 
             Step = 2;
-            TestAsserts.AssertAreEqual(currencyCodeToSelect, await PageMain.CurrencyButton.GetTextAsync(), "The currency button displays an incorrect currency");
+            Assert.That(currencyCodeToSelect, Is.EqualTo(await PageMain.CurrencyButton.GetTextAsync()), "The currency button displays an incorrect currency");
 
             Step = 3;
             await Page.WaitForTimeoutAsync(1500);
             string selectedCurrency = await PageMain.CurrencyPanel.GetSelectedCurrency();
-            TestAsserts.AssertThat(selectedCurrency, Does.Contain(currencyCodeToSelect), "The selected currency is incorrect");
+            Assert.That(selectedCurrency, Does.Contain(currencyCodeToSelect), "The selected currency is incorrect");
         }
 
         [Test]
         public async Task TC0004_TestLanguageButtonFunctionality()
         {
             Step = 1;
-            TestAsserts.AssertIsTrue(await PageMain.LanguageButton.IsVisibleAsync(), "Language button is not visible");
+            Assert.That(await PageMain.LanguageButton.IsVisibleAsync(), Is.True, "Language button is not visible");
 
             Step = 2;
             string? currentLanguage = await PageMain.LanguageButton.GetTextAsync();
-            TestAsserts.AssertIsTrue(string.IsNullOrEmpty(currentLanguage), "Current language is not displayed on the button");
-
+            Assert.That(string.IsNullOrEmpty(currentLanguage), Is.True, "Current language is not displayed on the button");
             Step = 3;
             await PageMain.LanguageButton.ClickAsync();
-            TestAsserts.AssertIsTrue(await PageMain.LanguagePanel.IsVisibleAsync(), "Language panel is not visible");
+            Assert.That(await PageMain.LanguagePanel.IsVisibleAsync(), Is.True, "Language panel is not visible");
         }
 
         [Test]
@@ -83,7 +80,7 @@ namespace BookingWebPageObjects.TestSuites
             Step = 1;
             string languageToSelect = "English (US)";
             await PageMain.LanguagePanel.OpenAsync();
-            TestAsserts.AssertIsTrue(await PageMain.LanguagePanel.IsVisibleAsync(), "Language panel is not visible");
+            Assert.That(await PageMain.LanguagePanel.IsVisibleAsync(), Is.True, "Language panel is not visible");
             if (await PageMain.LanguagePanel.GetSelectedLanguage() == languageToSelect)
                 languageToSelect = "Español";
             await PageMain.LanguagePanel.SelectLanguage(languageToSelect);
@@ -92,70 +89,73 @@ namespace BookingWebPageObjects.TestSuites
             await Page.WaitForTimeoutAsync(1500);
             await PageMain.LanguagePanel.OpenAsync();
             string selectedLanguage = await PageMain.LanguagePanel.GetSelectedLanguage();
-            TestAsserts.AssertThat(selectedLanguage, Does.Contain(languageToSelect), "The selected language is incorrect");
+            Assert.That(selectedLanguage, Does.Contain(languageToSelect), "The selected language is incorrect");
         }
 
         [Test]
         public async Task TC0006_TestCustomerServiceButtonFunctionality()
         {
             Step = 1;
-            TestAsserts.AssertIsTrue(await PageMain.CustomerServiceButton.IsVisibleAsync(), "Customer Service button is not visible");
+            Assert.That(await PageMain.CustomerServiceButton.IsVisibleAsync(), Is.True, "Customer Service button is not visible");
 
             Step = 2;
             await PageMain.CustomerServiceButton.ClickAsync();
-            TestAsserts.AssertThat(Page.Url, Does.Contain("https://secure.booking.com/"), "The Customer Service button did not navigate to the expected URL");
+            Assert.That(Page.Url, Does.Contain("https://secure.booking.com/"), "The Customer Service button did not navigate to the expected URL");
         }
 
         [Test]
         public async Task TC0007_TestListYourPropertyButtonFunctionality()
         {
             Step = 1;
-            TestAsserts.AssertIsTrue(await PageMain.ListYourPropertyButton.IsVisibleAsync(), "List Your Property button is not visible");
+            Assert.That(await PageMain.ListYourPropertyButton.IsVisibleAsync(), Is.True, "List Your Property button is not visible");
             Step = 2;
             await PageMain.ListYourPropertyButton.ClickAsync();
-            TestAsserts.AssertThat(Page.Url, Does.Contain("https://join.booking.com/"), "The List Your Property button did not navigate to the expected URL");
+            Assert.That(Page.Url, Does.Contain("https://join.booking.com/"), "The List Your Property button did not navigate to the expected URL");
         }
 
         [Test]
         public async Task TC0008_TestOccupancy()
         {
             Step = 1;
-            TestAsserts.AssertIsTrue(await PageMain.UserProfileButton.IsVisibleAsync(), "User Profile button is not visible"); // fails because there is no such button if you are not logged in
+            Assert.That(await PageMain.UserProfileButton.IsVisibleAsync(), Is.True, "User Profile button is not visible"); // fails because there is no such button if you are not logged in
             Step = 2;
             await PageMain.UserProfileButton.ClickAsync();
-            TestAsserts.AssertIsTrue(await PageMain.UserDropDownMenu.IsVisibleAsync(), "User Profile dropdown is not visible");
+            Assert.That(await PageMain.UserDropDownMenu.IsVisibleAsync(), Is.True, "User Profile dropdown is not visible");
         }
 
         [Test]
         public async Task TC0009_TestCheckInOutDates()
         {
             Step = 1;
-            TestAsserts.AssertIsTrue(await StaysPage.DatesButton.IsVisibleAsync(), "Check-in date picker is not visible");
+            Assert.That(await StaysPage.DatesButton.IsVisibleAsync(), Is.True, "Check-in date picker is not visible");
 
             Step = 2;
             await StaysPage.SelectDatesPanel.OpenAsync();
-            TestAsserts.AssertIsTrue(await StaysPage.SelectDatesPanel.IsVisibleAsync(), "Check-in date picker panel is not visible");
+            Assert.That(await StaysPage.SelectDatesPanel.IsVisibleAsync(), Is.True, "Check-in date picker panel is not visible");
 
             Step = 3;
             DateTime checkInDate = DateTime.Today.AddDays(7);
             DateTime checkOutDate = DateTime.Today.AddDays(14);
             await StaysPage.SelectDatesPanel.SelectDates(checkInDate, checkOutDate);
-            TestAsserts.AssertAreEqual($"Select dates{checkInDate.ToString("ddd, MMM d")} — {checkOutDate.ToString("ddd, MMM d")}", await StaysPage.DatesButton.GetTextAsync(), "The selected check-in date is incorrect");
-            TestAsserts.AssertAreEqual(checkInDate, (await StaysPage.SelectDatesPanel.GetSelectedDatesAsync()).checkInDate, "The selected check-in date is incorrect");
-            TestAsserts.AssertAreEqual(checkOutDate, (await StaysPage.SelectDatesPanel.GetSelectedDatesAsync()).checkOutDate, "The selected check-out date is incorrect");
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That($"Select dates{checkInDate.ToString("ddd, MMM d")} — {checkOutDate.ToString("ddd, MMM d")}", Is.EqualTo(await StaysPage.DatesButton.GetTextAsync()), "The selected check-in date is incorrect");
+                Assert.That(checkInDate, Is.EqualTo((await StaysPage.SelectDatesPanel.GetSelectedDatesAsync()).checkInDate), "The selected check-in date is incorrect");
+                Assert.That(checkOutDate, Is.EqualTo((await StaysPage.SelectDatesPanel.GetSelectedDatesAsync()).checkOutDate), "The selected check-out date is incorrect");
+            }
         }
 
         [Test]
         public async Task TC0010_TestOccupancy()
         {
             Step = 1;
-            TestAsserts.AssertIsTrue(await StaysPage.OccupancyButton.IsVisibleAsync(), "Occupancy button is not visible");
-            string currentValue = await StaysPage.OccupancyButton.GetTextAsync();
-            TestAsserts.AssertAreEqual("2 adults · 0 children · 1 room", currentValue);
+            Assert.That(await StaysPage.OccupancyButton.IsVisibleAsync(), Is.True, "Occupancy button is not visible");
+            string? currentValue = await StaysPage.OccupancyButton.GetTextAsync();
+            Assert.That(currentValue, Is.EqualTo("2 adults · 0 children · 1 room"), "The occupancy button text is incorrect");
 
             Step = 2;
             await StaysPage.OccupancyDropDown.OpenAsync();
-            TestAsserts.AssertIsTrue(await StaysPage.OccupancyDropDown.IsVisibleAsync());
+            Assert.That(await StaysPage.OccupancyDropDown.IsVisibleAsync(), Is.True, "Occupancy dropdown is not visible");
 
             Step = 3;
             string adults = "5";
@@ -169,16 +169,18 @@ namespace BookingWebPageObjects.TestSuites
             await StaysPage.OccupancyDropDown.TravelingWithPetsCheckBox.SetCheckAsync(true);
             await StaysPage.OccupancyDropDown.DoneButton.ClickAsync();
             currentValue = await StaysPage.OccupancyButton.GetTextAsync();
-            TestAsserts.AssertAreEqual($"{adults} adults · {children} child · Pets · {rooms} rooms", currentValue);
+            Assert.That(currentValue, Is.EqualTo($"{adults} adults · {children} child · Pets · {rooms} rooms"), "The occupancy button text is incorrect");
 
             Step = 4;
             await StaysPage.OccupancyDropDown.OpenAsync();
-
-            TestAsserts.AssertAreEqual(adults, await StaysPage.OccupancyDropDown.AdultsInputs.GetValueAsync());
-            TestAsserts.AssertAreEqual(children, await StaysPage.OccupancyDropDown.ChildrenInputs.GetValueAsync());
-            TestAsserts.AssertAreEqual("10 years old", await StaysPage.OccupancyDropDown.GetChildAgeDropDown().GetCurrentValueAsync());
-            TestAsserts.AssertAreEqual(rooms, await StaysPage.OccupancyDropDown.RoomsInputs.GetValueAsync());
-            TestAsserts.AssertIsTrue(await StaysPage.OccupancyDropDown.TravelingWithPetsCheckBox.IsCheckedAsync());
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(await StaysPage.OccupancyDropDown.AdultsInputs.GetValueAsync(), Is.EqualTo(adults), "The number of adults is incorrect");
+                Assert.That(await StaysPage.OccupancyDropDown.ChildrenInputs.GetValueAsync(), Is.EqualTo(children), "The number of children is incorrect");
+                Assert.That(await StaysPage.OccupancyDropDown.GetChildAgeDropDown().GetCurrentValueAsync(), Is.EqualTo("10 years old"), "The child age is incorrect");
+                Assert.That(await StaysPage.OccupancyDropDown.RoomsInputs.GetValueAsync(), Is.EqualTo(rooms), "The number of rooms is incorrect");
+                Assert.That(await StaysPage.OccupancyDropDown.TravelingWithPetsCheckBox.IsCheckedAsync(), Is.True, "Traveling with pets checkbox is not checked");
+            }
         }
 
         //[Test]

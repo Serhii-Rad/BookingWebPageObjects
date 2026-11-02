@@ -28,10 +28,17 @@ namespace BookingWebPageObjects.Sub_panels
             Logs.LogMethodEntry($"Locator: {_panelLocator}");
             await OpenAsync();
 
-            var checkInDate = DateTime.ParseExact(await _panelLocator.Locator("div[id='calendar-searchboxdatepicker'] span[role='checkbox'][aria-checked='true'][aria-label*='Check-in date']").GetAttributeAsync("data-date"), "yyyy-MM-dd", null);
-            var checkOutDate = DateTime.ParseExact(await _panelLocator.Locator("div[id='calendar-searchboxdatepicker'] span[role='checkbox'][aria-checked='true'][aria-label*='Check-out date']").GetAttributeAsync("data-date"), "yyyy-MM-dd", null);
+            string? checkInDateString = await _panelLocator.Locator("div[id='calendar-searchboxdatepicker'] span[role='checkbox'][aria-checked='true'][aria-label*='Check-in date']").GetAttributeAsync("data-date");
+            string? checkOutDateString = await _panelLocator.Locator("div[id='calendar-searchboxdatepicker'] span[role='checkbox'][aria-checked='true'][aria-label*='Check-out date']").GetAttributeAsync("data-date");
 
-            return (checkInDate, checkOutDate);
+            (DateTime? checkInDate, DateTime? checkOutDate) returnValues = (null, null);
+
+            if (!string.IsNullOrEmpty(checkInDateString))
+                returnValues.checkInDate = DateTime.ParseExact(checkInDateString, "yyyy-MM-dd", null);
+            if (!string.IsNullOrEmpty(checkOutDateString))
+                returnValues.checkOutDate = DateTime.ParseExact(checkOutDateString, "yyyy-MM-dd", null);
+
+            return returnValues;
         }
 
         public async Task OpenAsync()
