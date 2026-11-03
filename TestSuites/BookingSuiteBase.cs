@@ -24,9 +24,6 @@ namespace BookingWebPageObjects.TestSuites
         public void BookingOneTimeSetUp()
         {
             // Add any necessary actions here
-
-            TestContext.Out.WriteLine($"{nameof(BookingOneTimeSetUp)} finished: '{_test.Name}'.");
-            Logs.Logger.Info($"{nameof(BookingOneTimeSetUp)} finished: '{_test.Name}'.\n");
         }
 
         [SetUp]

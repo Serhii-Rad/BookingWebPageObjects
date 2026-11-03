@@ -35,6 +35,7 @@ namespace BookingWebPageObjects.TestSuites
             Step = 2;
             string? currentCurrency = await PageMain.CurrencyButton.GetTextAsync();
             Assert.That(string.IsNullOrEmpty(currentCurrency), Is.False, "Current currency is not displayed on the button");
+
             Step = 3;
             await PageMain.CurrencyButton.ClickAsync();
             Assert.That(await PageMain.CurrencyPanel.IsVisibleAsync(), Is.True, "Currency panel is not visible");
