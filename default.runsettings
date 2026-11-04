@@ -31,6 +31,9 @@
 		<Parameter name="defaultLogsFolder" value="" />
 		<Parameter name="defaultDownloadFolder" value="" />
 		<Parameter name="enableTracing" value="False" />
+		<!-- Extra Chromium flags (space-separated), appended to SuiteBase defaults.
+		     AutomationControlled: without it Booking detects automation and Flights autocomplete shows "Something's not right..." instead of suggestions. -->
+		<Parameter name="browserArgs" value="--disable-blink-features=AutomationControlled" />
 	</TestRunParameters>
 	
 	 <!--Configuration for loggers 
