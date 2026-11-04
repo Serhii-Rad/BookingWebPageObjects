@@ -11,44 +11,30 @@ namespace BookingWebPageObjects.TestSuites
     [TestFixture]
     internal class FlightsSmokeTests : BookingSuiteBase
     {
-        /// <summary>
-        /// Opens Flights directly: the 'Flights' tab on the main page may redirect to a localized page (ex. index.uk.html).
-        /// </summary>
-        protected override async Task DefaultTestSetUpAsync()
-        {
-            await Page.GotoAsync($"{BaseUrl}flights/");
-
-            // skip sign in popup
-            if (await Page.Locator("div[aria-label='Window offering discounts of 10% or more when you sign in to Booking.com']").WaitForConditionAsync(x => x.IsVisibleAsync(), Timeouts.Short))
-                await Page.Locator("button[aria-label='Dismiss sign-in info.']").ClickAsync();
-
-            TestContext.Out.WriteLine($"FlightsDefaultStartUpAsync finished: '{_test.Name}'.");
-            Logs.Logger.Info($"FlightsDefaultStartUpAsync finished: '{_test.Name}'.\n");
-        }
 
         [Test]
         public async Task TC0011_TestFlightsSearchBoxElementsArePresent()
         {
             Step = 1;
-            TestAsserts.AssertIsTrue(await FlightsPage.RoundTripRadioButton.IsVisibleAsync(), "Round-trip radio button is not visible");
-            TestAsserts.AssertIsTrue(await FlightsPage.OneWayRadioButton.IsVisibleAsync(), "One-way radio button is not visible");
-            TestAsserts.AssertIsTrue(await FlightsPage.MultiCityRadioButton.IsVisibleAsync(), "Multi-city radio button is not visible");
-            TestAsserts.AssertIsTrue(await FlightsPage.CabinClassDropDown.IsVisibleAsync(), "Cabin class drop down is not visible");
-            TestAsserts.AssertIsTrue(await FlightsPage.DirectFlightsOnlyCheckBox.IsVisibleAsync(), "Direct flights only check box is not visible");
+            Assert.That(await FlightsPage.RoundTripRadioButton.IsVisibleAsync(), Is.True, "Round-trip radio button is not visible");
+            Assert.That(await FlightsPage.OneWayRadioButton.IsVisibleAsync(), Is.True, "One-way radio button is not visible");
+            Assert.That(await FlightsPage.MultiCityRadioButton.IsVisibleAsync(), Is.True, "Multi-city radio button is not visible");
+            Assert.That(await FlightsPage.CabinClassDropDown.IsVisibleAsync(), Is.True, "Cabin class drop down is not visible");
+            Assert.That(await FlightsPage.DirectFlightsOnlyCheckBox.IsVisibleAsync(), Is.True, "Direct flights only check box is not visible");
 
             Step = 2;
-            TestAsserts.AssertIsTrue(await FlightsPage.FromButton.IsVisibleAsync(), "From button is not visible");
-            TestAsserts.AssertIsTrue(await FlightsPage.ToButton.IsVisibleAsync(), "To button is not visible");
-            TestAsserts.AssertIsTrue(await FlightsPage.SwapLocationsButton.IsVisibleAsync(), "Swap locations button is not visible");
-            TestAsserts.AssertIsTrue(await FlightsPage.DatesButton.IsVisibleAsync(), "Dates button is not visible");
-            TestAsserts.AssertIsTrue(await FlightsPage.TravelersButton.IsVisibleAsync(), "Travelers button is not visible");
-            TestAsserts.AssertIsTrue(await FlightsPage.SearchButton.IsVisibleAsync(), "Search button is not visible");
+            Assert.That(await FlightsPage.FromButton.IsVisibleAsync(), Is.True, "From button is not visible");
+            Assert.That(await FlightsPage.ToButton.IsVisibleAsync(), Is.True, "To button is not visible");
+            Assert.That(await FlightsPage.SwapLocationsButton.IsVisibleAsync(), Is.True, "Swap locations button is not visible");
+            Assert.That(await FlightsPage.DatesButton.IsVisibleAsync(), Is.True, "Dates button is not visible");
+            Assert.That(await FlightsPage.TravelersButton.IsVisibleAsync(), Is.True, "Travelers button is not visible");
+            Assert.That(await FlightsPage.SearchButton.IsVisibleAsync(), Is.True, "Search button is not visible");
 
             Step = 3;
-            TestAsserts.AssertIsTrue(await FlightsPage.RoundTripRadioButton.IsCheckedAsync(), "Round-trip is not selected by default");
-            TestAsserts.AssertIsFalse(await FlightsPage.DirectFlightsOnlyCheckBox.IsCheckedAsync(), "Direct flights only is checked by default");
-            TestAsserts.AssertAreEqual("Economy", await FlightsPage.CabinClassDropDown.GetCurrentValueAsync(), "Default cabin class is incorrect");
-            TestAsserts.AssertThat(await FlightsPage.TravelersButton.GetTextAsync(), Does.Contain("1 adult"), "Default travelers amount is incorrect");
+            Assert.That(await FlightsPage.RoundTripRadioButton.IsCheckedAsync(), Is.True, "Round-trip is not selected by default");
+            Assert.That(await FlightsPage.DirectFlightsOnlyCheckBox.IsCheckedAsync(), Is.False, "Direct flights only is checked by default");
+            Assert.That(await FlightsPage.CabinClassDropDown.GetCurrentValueAsync(), Is.EqualTo("Economy"), "Default cabin class is incorrect");
+            Assert.That(await FlightsPage.TravelersButton.GetTextAsync(), Does.Contain("1 adult"), "Default travelers amount is incorrect");
         }
 
         [Test]
