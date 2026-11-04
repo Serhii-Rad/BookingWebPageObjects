@@ -11,7 +11,6 @@ namespace BookingWebPageObjects.TestSuites
     [TestFixture]
     internal class FlightsSmokeTests : BookingSuiteBase
     {
-
         [Test]
         public async Task TC0011_TestFlightsSearchBoxElementsArePresent()
         {
@@ -41,13 +40,13 @@ namespace BookingWebPageObjects.TestSuites
         public async Task TC0012_TestTripTypeSwitching()
         {
             Step = 1;
-            await FlightsPage.OneWayRadioButton.SetCheckAsync(true);
+            await FlightsPage.OneWayRadioButton.SetCheckAsync();
             TestAsserts.AssertIsTrue(await FlightsPage.OneWayRadioButton.IsCheckedAsync(), "One-way is not selected");
             TestAsserts.AssertIsFalse(await FlightsPage.RoundTripRadioButton.IsCheckedAsync(), "Round-trip is still selected after One-way selection");
             TestAsserts.AssertThat(await FlightsPage.DatesButton.GetTextAsync(), Does.Not.Contain("–"), "Dates button shows a return date for One-way trip");
 
             Step = 2;
-            await FlightsPage.RoundTripRadioButton.SetCheckAsync(true);
+            await FlightsPage.RoundTripRadioButton.SetCheckAsync();
             TestAsserts.AssertIsTrue(await FlightsPage.RoundTripRadioButton.IsCheckedAsync(), "Round-trip is not selected");
             TestAsserts.AssertIsFalse(await FlightsPage.OneWayRadioButton.IsCheckedAsync(), "One-way is still selected after Round-trip selection");
             TestAsserts.AssertThat(await FlightsPage.DatesButton.GetTextAsync(), Does.Contain("–"), "Dates button does not show a return date for Round-trip");

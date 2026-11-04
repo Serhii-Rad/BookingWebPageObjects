@@ -25,7 +25,7 @@ namespace BookingWebPageObjects.Pages
         private FlightsDatesPanel? _datesPanel;
         private FlightsTravelersPanel? _travelersPanel;
 
-        public FlightsPage(IPage page) : base(page)
+        public FlightsPage(IPage page) : base(page.Locator(_pageSelector))
         {
         }
 
