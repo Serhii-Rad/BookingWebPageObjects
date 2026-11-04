@@ -82,6 +82,7 @@ namespace BookingWebPageObjects.TestSuites
         #region Pages
         public PageMain PageMain => Pages.PageMain;
         public StaysPage StaysPage => Pages.StaysPage;
+        public FlightsPage FlightsPage => Pages.FlightsPage;
         #endregion
     }
 }
