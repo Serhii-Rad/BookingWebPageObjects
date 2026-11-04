@@ -73,7 +73,8 @@ namespace BookingWebPageObjects.TestSuites
             Logs.Logger.Info($"BookingDefaultStartUpAsync finished: '{_test.Name}'.\n");
         }
 
-        public Page_Objects.Pages Pages => new Page_Objects.Pages(Page); // is needed to get access to all pages and page objects in any point of the test suite, without creating new instances of pages and page objects.
+        private Page_Objects.Pages? _pages;
+        public Page_Objects.Pages Pages => _pages ??= new Page_Objects.Pages(Page); // is needed to get access to all pages and page objects in any point of the test suite, without creating new instances of pages and page objects.
 
         /// <summary>
         ///  All the pages and page objects are listed here for easy access. You can use them in your tests like this: PageMain.SomeMethod(), StaysPage.SomeMethod(), instead of Pages.PageMain.SomeMethod(), Pages.StaysPage.SomeMethod(). This is just for convenience and readability of the tests.

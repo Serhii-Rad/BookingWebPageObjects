@@ -14,10 +14,8 @@ namespace BookingWebPageObjects.BaseElements
         public Button PlusButton => new Button(_baseLocator.Locator("~button").Last);
         public Button MinusButton => new Button(_baseLocator.Locator("~button").First);
 
-        public new async Task SetTextAsync(string text, bool withEnterPress = true, bool withClearing = true, int millisecondsInputDelay = 20)
+        protected override async Task SetTextLogicAsync(string text, bool withEnterPress = true, bool withClearing = true, int millisecondsInputDelay = 20)
         {
-            Logs.LogMethodEntry($"Locator: {_baseLocator}; Text: '{text}'; With pressing Enter: {withEnterPress}; With clearing: {withClearing}; Input delay (ms): {millisecondsInputDelay}", CoreLogLevel.Info);
-
             string? currentValueString = await base.GetValueAsync();
 
             if (string.IsNullOrEmpty(currentValueString))

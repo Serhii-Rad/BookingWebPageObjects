@@ -10,6 +10,7 @@ namespace BookingWebPageObjects.Sub_panels
         private static readonly string panelSelector = "div[data-testid='datepicker-tabs']";
         public SelectDatesPanel(ILocator locator, Button triggerElementToOpen) : base(locator.Locator(panelSelector), triggerElementToOpen)
         {
+
         }
 
         public async Task SelectDates(DateTime checkInDate, DateTime checkOutDate)
