@@ -11,21 +11,6 @@ namespace BookingWebPageObjects.TestSuites
     [TestFixture]
     internal class FlightsSmokeTests : BookingSuiteBase
     {
-        /// <summary>
-        /// Opens Flights directly: the 'Flights' tab on the main page may redirect to a localized page (ex. index.uk.html).
-        /// </summary>
-        protected override async Task DefaultTestSetUpAsync()
-        {
-            await Page.GotoAsync($"{BaseUrl}flights/");
-
-            // skip sign in popup
-            if (await Page.Locator("div[aria-label='Window offering discounts of 10% or more when you sign in to Booking.com']").WaitForConditionAsync(x => x.IsVisibleAsync(), Timeouts.Short))
-                await Page.Locator("button[aria-label='Dismiss sign-in info.']").ClickAsync();
-
-            TestContext.Out.WriteLine($"FlightsDefaultStartUpAsync finished: '{_test.Name}'.");
-            Logs.Logger.Info($"FlightsDefaultStartUpAsync finished: '{_test.Name}'.\n");
-        }
-
         [Test]
         public async Task TC0011_TestFlightsSearchBoxElementsArePresent()
         {
@@ -55,13 +40,13 @@ namespace BookingWebPageObjects.TestSuites
         public async Task TC0012_TestTripTypeSwitching()
         {
             Step = 1;
-            await FlightsPage.OneWayRadioButton.SetCheckAsync(true);
+            await FlightsPage.OneWayRadioButton.SetCheckAsync();
             TestAsserts.AssertIsTrue(await FlightsPage.OneWayRadioButton.IsCheckedAsync(), "One-way is not selected");
             TestAsserts.AssertIsFalse(await FlightsPage.RoundTripRadioButton.IsCheckedAsync(), "Round-trip is still selected after One-way selection");
             TestAsserts.AssertThat(await FlightsPage.DatesButton.GetTextAsync(), Does.Not.Contain("–"), "Dates button shows a return date for One-way trip");
 
             Step = 2;
-            await FlightsPage.RoundTripRadioButton.SetCheckAsync(true);
+            await FlightsPage.RoundTripRadioButton.SetCheckAsync();
             TestAsserts.AssertIsTrue(await FlightsPage.RoundTripRadioButton.IsCheckedAsync(), "Round-trip is not selected");
             TestAsserts.AssertIsFalse(await FlightsPage.OneWayRadioButton.IsCheckedAsync(), "One-way is still selected after Round-trip selection");
             TestAsserts.AssertThat(await FlightsPage.DatesButton.GetTextAsync(), Does.Contain("–"), "Dates button does not show a return date for Round-trip");

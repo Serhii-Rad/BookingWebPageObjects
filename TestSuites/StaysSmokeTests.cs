@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace BookingWebPageObjects.TestSuites
 {
     [TestFixture]
-    internal class SmokeTests : BookingSuiteBase
+    internal class StaysSmokeTests : BookingSuiteBase
     {
         [Test]
         public async Task TC0001_TestAllExpectedTabsButtonsArePresent()
