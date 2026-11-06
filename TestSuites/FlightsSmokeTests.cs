@@ -1,10 +1,6 @@
 using BookingWebPageObjects.Pages;
 using NUnit.Framework;
-using PlaywrightBaseFramework.Helpers.Extensions;
 using System.Globalization;
-using TestFrameworkCore.Asserts;
-using TestFrameworkCore.Helpers;
-using TestFrameworkCore.LoggerLogs;
 
 namespace BookingWebPageObjects.TestSuites
 {
@@ -65,7 +61,7 @@ namespace BookingWebPageObjects.TestSuites
         {
             Step = 1;
             List<string> expectedCabinClasses = new List<string> { "Economy", "Premium economy", "Business", "First-class" };
-            List<string?> actualCabinClasses = await FlightsPage.CabinClassDropDown.GetItemsListAsync();
+            List<string> actualCabinClasses = await FlightsPage.CabinClassDropDown.GetItemsListAsync();
             Assert.That(actualCabinClasses, Is.EquivalentTo(expectedCabinClasses), "Cabin class options are incorrect");
 
             Step = 2;

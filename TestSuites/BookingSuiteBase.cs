@@ -88,7 +88,7 @@ namespace BookingWebPageObjects.TestSuites
 }
 
 
-// Explanation about setup/teardown method ierarhy
+// Explanation about setup/teardown method hierarchy
 // BaseOneTimeSetup - One time setup method from base suite class
 //     BookingOneTimeSetUpAsync - One time setup method from child suite class
 //         BaseEveryTestSetupAsync - Setup method for every test case from base suite class

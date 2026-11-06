@@ -31,9 +31,9 @@
 		<Parameter name="defaultLogsFolder" value="" />
 		<Parameter name="defaultDownloadFolder" value="" />
 		<Parameter name="enableTracing" value="False" />
-		<!-- Extra Chromium flags (space-separated), appended to SuiteBase defaults.
-		     AutomationControlled: without it Booking detects automation and Flights autocomplete shows "Something's not right..." instead of suggestions. -->
-		<Parameter name="browserArgs" value="--disable-blink-features=AutomationControlled" />
+		<!-- Additional Chromium flags as a JSON string array; appended to SuiteBase defaults.
+		     Booking's flight autocomplete requires AutomationControlled to be disabled. -->
+		<Parameter name="browserArgs" value='["--disable-blink-features=AutomationControlled"]' />
 	</TestRunParameters>
 	
 	 <!--Configuration for loggers 
@@ -58,17 +58,4 @@
 		</Loggers>
 	</LoggerRunSettings>-->
 	
-	<!-- Playwright -->
-	<Playwright>
-		<BrowserName>chromium</BrowserName>
-		<!-- chromium, firefox, webkit-->
-		<ExpectTimeout>5000</ExpectTimeout>
-		<LaunchOptions>
-			<Headless>false</Headless>
-			<!-- Not works with LaunchAsync() -->
-			<Channel>chrome</Channel>
-			<!-- chrome, chrome-beta, msedge, msedge-beta, msedge-dev, firefox, firefox-asan, webkit-->
-			<!-- <SlowMo>2000</SlowMo> -->
-		</LaunchOptions>
-	</Playwright>
 </RunSettings>
