@@ -5,7 +5,7 @@ namespace BookingWebPageObjects.BaseElements
 {
     internal class DropDownMenu : DropDownMenuBase
     {
-        public DropDownMenu(ILocator locator, string anyItemInMenuSelector) : base(locator, anyItemInMenuSelector)
+        public DropDownMenu(ILocator locator, string selectorThatSelectsAllItems) : base(locator, selectorThatSelectsAllItems)
         {
         }
     }

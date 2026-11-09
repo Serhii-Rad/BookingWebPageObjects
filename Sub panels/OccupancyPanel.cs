@@ -1,5 +1,6 @@
 ﻿using BookingWebPageObjects.BaseElements;
 using Microsoft.Playwright;
+using PlaywrightBaseFramework.PageCore;
 using TestFrameworkCore.LoggerLogs;
 
 namespace BookingWebPageObjects.Sub_panels
