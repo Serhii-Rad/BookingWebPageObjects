@@ -1,4 +1,6 @@
+using BookingWebPageObjects.BaseElements;
 using BookingWebPageObjects.Pages;
+using Microsoft.Graph.Models;
 using NUnit.Framework;
 using System.Globalization;
 
@@ -7,6 +9,12 @@ namespace BookingWebPageObjects.TestSuites
     [TestFixture]
     internal class FlightsSmokeTests : BookingSuiteBase
     {
+        [SetUp]
+        public async Task SetupGlobalFlightPage()
+        {
+            await PageMain.TabsMenu.GetLocator().Locator("a[id='flights']").ClickAsync();
+        }
+
         [Test]
         public async Task TC0011_TestFlightsSearchBoxElementsArePresent()
         {
