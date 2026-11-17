@@ -1,5 +1,6 @@
 using BookingWebPageObjects.BaseElements;
 using Microsoft.Playwright;
+using PlaywrightBaseFramework.BaseElements;
 using PlaywrightBaseFramework.PageCore;
 using TestFrameworkCore.LoggerLogs;
 
@@ -12,14 +13,14 @@ namespace BookingWebPageObjects.Sub_panels
     {
         private static readonly string panelSelector = "div[data-bui-trap-root]:has([data-ui-name='occupancy_adults'])";
 
-        public FlightsTravelersPanel(ILocator pageLocator, Button triggerToOpen) : base(pageLocator.Locator(panelSelector), triggerToOpen)
+        public FlightsTravelersPanel(ILocator pageLocator, ButtonBase triggerToOpen) : base(pageLocator.Locator(panelSelector), triggerToOpen)
         {
         }
 
         public InputFieldWithButtons AdultsInputs => new InputFieldWithButtons(_panelLocator.Locator("div[data-ui-name='occupancy_adults'] input[role='spinbutton']"));
         public InputFieldWithButtons ChildrenInputs => new InputFieldWithButtons(_panelLocator.Locator("div[data-ui-name='occupancy_children'] input[role='spinbutton']"));
 
-        public Button DoneButton => new Button(_panelLocator.Locator("button[data-ui-name='button_occupancy_action_bar_done']"));
+        public ButtonBase DoneButton => new ButtonBase(_panelLocator.Locator("button[data-ui-name='button_occupancy_action_bar_done']"));
 
         private ILocator GetChildAgeSelect(int number) => _panelLocator.Locator($"select[data-ui-name='select_occupancy_children_age_{number}']");
 
@@ -45,7 +46,7 @@ namespace BookingWebPageObjects.Sub_panels
             Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
             if (await IsHiddenAsync())
             {
-                if (_triggerElementToOpen is Button button)
+                if (_triggerElementToOpen is ButtonBase button)
                     await button.ClickAsync();
                 else
                     throw new InvalidOperationException("Button to open is null or not a Button.");

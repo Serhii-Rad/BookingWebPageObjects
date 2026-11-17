@@ -1,14 +1,15 @@
 ﻿using BookingWebPageObjects.BaseElements;
 using Microsoft.Playwright;
-using TestFrameworkCore.LoggerLogs;
+using PlaywrightBaseFramework.BaseElements;
 using PlaywrightBaseFramework.PageCore;
+using TestFrameworkCore.LoggerLogs;
 
 namespace BookingWebPageObjects.Sub_panels
 {
     internal class CurrencyPanel : SubPanelBase
     {
         private readonly static string panelSelector = "div[id='header_currency_picker'][role='dialog']";
-        public CurrencyPanel(ILocator pageLocator, Button triggerElementToOpen) : base(pageLocator.Locator(panelSelector), triggerElementToOpen)
+        public CurrencyPanel(ILocator pageLocator, ButtonBase triggerElementToOpen) : base(pageLocator.Locator(panelSelector), triggerElementToOpen)
         {
         }
 
@@ -46,7 +47,7 @@ namespace BookingWebPageObjects.Sub_panels
 
             if (await IsHiddenAsync())
             {
-                if (_triggerElementToOpen is Button button)
+                if (_triggerElementToOpen is ButtonBase button)
                     await button.ClickAsync();
                 else
                     throw new InvalidOperationException("Button to open is null or not a Button.");

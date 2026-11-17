@@ -1,6 +1,7 @@
 using BookingWebPageObjects.BaseElements;
 using BookingWebPageObjects.Sub_panels;
 using Microsoft.Playwright;
+using PlaywrightBaseFramework.BaseElements;
 using PlaywrightBaseFramework.PageCore;
 
 namespace BookingWebPageObjects.Pages
@@ -9,17 +10,17 @@ namespace BookingWebPageObjects.Pages
     {
         private static readonly string _pageSelector = "main";
 
-        private RadioButton? _roundTripRadioButton;
-        private RadioButton? _oneWayRadioButton;
-        private RadioButton? _multiCityRadioButton;
-        private DropDownMenu? _cabinClassDropDown;
-        private CheckBox? _directFlightsOnlyCheckBox;
-        private Button? _fromButton;
-        private Button? _toButton;  
-        private Button? _swapLocationsButton;
-        private Button? _datesButton;
-        private Button? _travelersButton;
-        private Button? _searchButton;
+        private RadioButtonBase? _roundTripRadioButton;
+        private RadioButtonBase? _oneWayRadioButton;
+        private RadioButtonBase? _multiCityRadioButton;
+        private DropDownMenuBase? _cabinClassDropDown;
+        private CheckBoxBase? _directFlightsOnlyCheckBox;
+        private ButtonBase? _fromButton;
+        private ButtonBase? _toButton;  
+        private ButtonBase? _swapLocationsButton;
+        private ButtonBase? _datesButton;
+        private ButtonBase? _travelersButton;
+        private ButtonBase? _searchButton;
         private FlightsLocationPanel? _fromLocationPanel;
         private FlightsLocationPanel? _toLocationPanel;
         private FlightsDatesPanel? _datesPanel;
@@ -29,18 +30,18 @@ namespace BookingWebPageObjects.Pages
         {
         }
 
-        public RadioButton RoundTripRadioButton => _roundTripRadioButton ??= new RadioButton(_pageLocator.Locator("input[data-ui-name='input_search_type_roundtrip']"));
-        public RadioButton OneWayRadioButton => _oneWayRadioButton ??= new RadioButton(_pageLocator.Locator("input[data-ui-name='input_search_type_oneway']"));
-        public RadioButton MultiCityRadioButton => _multiCityRadioButton ??= new RadioButton(_pageLocator.Locator("input[data-ui-name='input_search_type_multistop']"));
-        public DropDownMenu CabinClassDropDown => _cabinClassDropDown ??= new DropDownMenu(_pageLocator.Locator("select[data-ui-name='cabin_class_input']"), "option");
-        public CheckBox DirectFlightsOnlyCheckBox => _directFlightsOnlyCheckBox ??= new CheckBox(_pageLocator.Locator("input[data-ui-name='direct_flights_input']"));
+        public RadioButtonBase RoundTripRadioButton => _roundTripRadioButton ??= new RadioButtonBase(_pageLocator.Locator("input[data-ui-name='input_search_type_roundtrip']"));
+        public RadioButtonBase OneWayRadioButton => _oneWayRadioButton ??= new RadioButtonBase(_pageLocator.Locator("input[data-ui-name='input_search_type_oneway']"));
+        public RadioButtonBase MultiCityRadioButton => _multiCityRadioButton ??= new RadioButtonBase(_pageLocator.Locator("input[data-ui-name='input_search_type_multistop']"));
+        public DropDownMenuBase CabinClassDropDown => _cabinClassDropDown ??= new DropDownMenuBase(_pageLocator.Locator("select[data-ui-name='cabin_class_input']"), "option");
+        public CheckBoxBase DirectFlightsOnlyCheckBox => _directFlightsOnlyCheckBox ??= new CheckBoxBase(_pageLocator.Locator("input[data-ui-name='direct_flights_input']"));
 
-        public Button FromButton => _fromButton ??= new Button(_pageLocator.Locator("button[data-ui-name='input_location_from_segment_0']"));
-        public Button ToButton => _toButton ??= new Button(_pageLocator.Locator("button[data-ui-name='input_location_to_segment_0']"));
-        public Button SwapLocationsButton => _swapLocationsButton ??= new Button(_pageLocator.Locator("button[aria-label^='Switch origin']"));
-        public Button DatesButton => _datesButton ??= new Button(_pageLocator.Locator("button[data-ui-name='button_date_segment_0']"));
-        public Button TravelersButton => _travelersButton ??= new Button(_pageLocator.Locator("button[data-ui-name='button_occupancy']"));
-        public Button SearchButton => _searchButton ??= new Button(_pageLocator.Locator("button[data-ui-name='button_search_submit']"));
+        public ButtonBase FromButton => _fromButton ??= new ButtonBase(_pageLocator.Locator("button[data-ui-name='input_location_from_segment_0']"));
+        public ButtonBase ToButton => _toButton ??= new ButtonBase(_pageLocator.Locator("button[data-ui-name='input_location_to_segment_0']"));
+        public ButtonBase SwapLocationsButton => _swapLocationsButton ??= new ButtonBase(_pageLocator.Locator("button[aria-label^='Switch origin']"));
+        public ButtonBase DatesButton => _datesButton ??= new ButtonBase(_pageLocator.Locator("button[data-ui-name='button_date_segment_0']"));
+        public ButtonBase TravelersButton => _travelersButton ??= new ButtonBase(_pageLocator.Locator("button[data-ui-name='button_occupancy']"));
+        public ButtonBase SearchButton => _searchButton ??= new ButtonBase(_pageLocator.Locator("button[data-ui-name='button_search_submit']"));
 
         public FlightsLocationPanel FromLocationPanel => _fromLocationPanel ??= new FlightsLocationPanel(_pageLocator, FromButton);
         public FlightsLocationPanel ToLocationPanel => _toLocationPanel ??= new FlightsLocationPanel(_pageLocator, ToButton);

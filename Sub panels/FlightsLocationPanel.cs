@@ -1,5 +1,6 @@
 using BookingWebPageObjects.BaseElements;
 using Microsoft.Playwright;
+using PlaywrightBaseFramework.BaseElements;
 using PlaywrightBaseFramework.PageCore;
 using TestFrameworkCore.LoggerLogs;
 
@@ -13,12 +14,12 @@ namespace BookingWebPageObjects.Sub_panels
         private static readonly string panelSelector = "div[data-bui-trap-root]:has(input[data-ui-name='input_text_autocomplete'])";
         private static readonly string suggestionSelector = "li[data-ui-name='locations_list_item']";
 
-        public FlightsLocationPanel(ILocator pageLocator, Button triggerElementToOpen) : base(pageLocator.Locator(panelSelector), triggerElementToOpen)
+        public FlightsLocationPanel(ILocator pageLocator, ButtonBase triggerElementToOpen) : base(pageLocator.Locator(panelSelector), triggerElementToOpen)
         {
         }
 
-        public InputField SearchInputField => new InputField(_panelLocator.Locator("input[data-ui-name='input_text_autocomplete']"));
-        public DropDownMenu SuggestionsDropDown => new DropDownMenu(_panelLocator.Locator("ul[role='listbox']"), suggestionSelector);
+        public InputFieldBase SearchInputField => new InputFieldBase(_panelLocator.Locator("input[data-ui-name='input_text_autocomplete']"));
+        public DropDownMenuBase SuggestionsDropDown => new DropDownMenuBase(_panelLocator.Locator("ul[role='listbox']"), suggestionSelector);
         /// <summary>
         /// Chips of already selected airports/cities (ex. 'IEV Kyiv'). Origin is prefilled by geolocation.
         /// </summary>
@@ -56,7 +57,7 @@ namespace BookingWebPageObjects.Sub_panels
             Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
             if (await IsHiddenAsync())
             {
-                if (_triggerElementToOpen is Button button)
+                if (_triggerElementToOpen is ButtonBase button)
                     await button.ClickAsync();
                 else
                     throw new InvalidOperationException("Button to open is null or not a Button.");

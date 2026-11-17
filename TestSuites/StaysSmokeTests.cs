@@ -1,6 +1,7 @@
 ﻿using BookingWebPageObjects.BaseElements;
 using BookingWebPageObjects.Page_Objects;
 using NUnit.Framework;
+using PlaywrightBaseFramework.BaseElements;
 
 namespace BookingWebPageObjects.TestSuites
 {
@@ -12,9 +13,9 @@ namespace BookingWebPageObjects.TestSuites
         {
             Step = 1;
             List<string> expectedTabsNames = new List<string> { "Stays", "Flights", "Flight + Hotel", "Car rental" };
-            IReadOnlyList<Button> actualButtonsList = await PageMain.TabsMenu.GetMenuElementsAsync(locator => new Button(locator));
+            IReadOnlyList<ButtonBase> actualButtonsList = await PageMain.TabsMenu.GetMenuElementsAsync(locator => new ButtonBase(locator));
             List<string?> actualButtonsText = new List<string?>();
-            foreach (Button button in actualButtonsList)
+            foreach (ButtonBase button in actualButtonsList)
             {
                 string? buttonText = await button.GetTextAsync();
                 actualButtonsText.Add(buttonText);

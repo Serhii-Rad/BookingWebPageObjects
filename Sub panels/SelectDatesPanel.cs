@@ -1,6 +1,7 @@
 ﻿using BookingWebPageObjects.BaseElements;
 using Microsoft.Playwright;
 using Microsoft.Testing.Platform.Logging;
+using PlaywrightBaseFramework.BaseElements;
 using PlaywrightBaseFramework.PageCore;
 using TestFrameworkCore.LoggerLogs;
 
@@ -9,7 +10,7 @@ namespace BookingWebPageObjects.Sub_panels
     internal class SelectDatesPanel : SubPanelBase
     {
         private static readonly string panelSelector = "div[data-testid='datepicker-tabs']";
-        public SelectDatesPanel(ILocator locator, Button triggerElementToOpen) : base(locator.Locator(panelSelector), triggerElementToOpen)
+        public SelectDatesPanel(ILocator locator, ButtonBase triggerElementToOpen) : base(locator.Locator(panelSelector), triggerElementToOpen)
         {
 
         }
@@ -48,7 +49,7 @@ namespace BookingWebPageObjects.Sub_panels
             Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
             if (await IsHiddenAsync())
             {
-                if (_triggerElementToOpen is Button inputField)
+                if (_triggerElementToOpen is ButtonBase inputField)
                     await inputField.ClickAsync();
                 else
                     throw new InvalidOperationException("InputField to open is null or not an InputField.");

@@ -1,5 +1,6 @@
 using BookingWebPageObjects.BaseElements;
 using Microsoft.Playwright;
+using PlaywrightBaseFramework.BaseElements;
 using PlaywrightBaseFramework.PageCore;
 using TestFrameworkCore.LoggerLogs;
 
@@ -14,14 +15,14 @@ namespace BookingWebPageObjects.Sub_panels
         private const int maxMonthsToScroll = 12;
         private const int dateCellWaitTimeout = 1000;
 
-        public FlightsDatesPanel(ILocator pageLocator, Button triggerElementToOpen) : base(pageLocator.Locator(panelSelector), triggerElementToOpen)
+        public FlightsDatesPanel(ILocator pageLocator, ButtonBase triggerElementToOpen) : base(pageLocator.Locator(panelSelector), triggerElementToOpen)
         {
         }
 
-        public Button NextMonthButton => new Button(_panelLocator.Locator("button[aria-label='Next month']"));
-        public Button PreviousMonthButton => new Button(_panelLocator.Locator("button[aria-label='Previous month']"));
+        public ButtonBase NextMonthButton => new ButtonBase(_panelLocator.Locator("button[aria-label='Next month']"));
+        public ButtonBase PreviousMonthButton => new ButtonBase(_panelLocator.Locator("button[aria-label='Previous month']"));
 
-        public Button GetDateCell(DateTime date) => new Button(_panelLocator.Locator($"span[data-ui-name='calendar_cell_{date:yyyy-MM-dd}']"));
+        public ButtonBase GetDateCell(DateTime date) => new ButtonBase(_panelLocator.Locator($"span[data-ui-name='calendar_cell_{date:yyyy-MM-dd}']"));
 
         /// <summary>
         /// For One-way trip leave returnDate null.
@@ -52,7 +53,7 @@ namespace BookingWebPageObjects.Sub_panels
             Logs.LogMethodEntry(logLevel: CoreLogLevel.Info);
             if (await IsHiddenAsync())
             {
-                if (_triggerElementToOpen is Button button)
+                if (_triggerElementToOpen is ButtonBase button)
                     await button.ClickAsync();
                 else
                     throw new InvalidOperationException("Button to open is null or not a Button.");
