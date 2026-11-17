@@ -29,12 +29,15 @@ namespace BookingWebPageObjects.TestSuites
         [SetUp]
         public async Task BookingEveryTestSetUp()
         {
-            await CreatePageAsync();
+            // Now this logic is in the base startup method of the base class
+            //await CreatePageAsync();
 
-            var startupCustomMethodTask = GetCustomStartUpMethod()?.Invoke(this, null);
-            if (startupCustomMethodTask is Task task)
-                await task;
+            //var startupCustomMethodTask = GetCustomStartUpMethod()?.Invoke(this, null);
+            //if (startupCustomMethodTask is Task task)
+            //    await task;
 
+            if (!string.IsNullOrEmpty(BaseUrl))
+                await Page.GotoAsync(BaseUrl);
             // Add any necessary actions here
 
             TestContext.Out.WriteLine($"{nameof(BookingEveryTestSetUp)} finished: '{_test.Name}'.");
@@ -62,9 +65,6 @@ namespace BookingWebPageObjects.TestSuites
 
         protected override async Task DefaultTestSetUpAsync()
         {
-            if (!string.IsNullOrEmpty(BaseUrl))
-                await Page.GotoAsync(BaseUrl);
-
             // skip sign in popup
             if (await Page.Locator("div[aria-label='Window offering discounts of 10% or more when you sign in to Booking.com']").WaitForConditionAsync(x => x.IsVisibleAsync(), Timeouts.Medium))
                 await Page.Locator("button[aria-label='Dismiss sign-in info.']").ClickAsync();

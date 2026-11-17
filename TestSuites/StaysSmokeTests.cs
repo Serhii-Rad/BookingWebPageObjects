@@ -2,6 +2,7 @@
 using BookingWebPageObjects.Page_Objects;
 using NUnit.Framework;
 using PlaywrightBaseFramework.BaseElements;
+using TestFrameworkCore.Helpers.Attributes;
 
 namespace BookingWebPageObjects.TestSuites
 {
@@ -183,6 +184,18 @@ namespace BookingWebPageObjects.TestSuites
                 Assert.That(await StaysPage.OccupancyDropDown.RoomsInputs.GetValueAsync(), Is.EqualTo(rooms), "The number of rooms is incorrect");
                 Assert.That(await StaysPage.OccupancyDropDown.TravelingWithPetsCheckBox.IsCheckedAsync(), Is.True, "Traveling with pets checkbox is not checked");
             }
+        }
+
+        [TestStartUp("TC0011")]
+        private void StartupWithoutPopupClosing()
+        {
+
+        }
+
+        [Test]
+        public async Task TC0011_TestSignInPopup()
+        {
+            // TODO: add logic for popup check
         }
 
         //[Test]
