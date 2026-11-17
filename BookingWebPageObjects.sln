@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFrameworkCore", "..\Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrelloWebPageObjects", "..\TrelloWebPageObjects\TrelloWebPageObjects.csproj", "{52BF2324-4F33-4A35-B3C9-BA17A9EB1C70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingMobilePageObjects", "..\BookingMobilePageObjects\BookingMobilePageObjects.csproj", "{34DBDC45-4898-43BC-8016-8C22502849B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{52BF2324-4F33-4A35-B3C9-BA17A9EB1C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52BF2324-4F33-4A35-B3C9-BA17A9EB1C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52BF2324-4F33-4A35-B3C9-BA17A9EB1C70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34DBDC45-4898-43BC-8016-8C22502849B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34DBDC45-4898-43BC-8016-8C22502849B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34DBDC45-4898-43BC-8016-8C22502849B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34DBDC45-4898-43BC-8016-8C22502849B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
